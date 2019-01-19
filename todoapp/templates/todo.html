@@ -1,24 +1,30 @@
 <!DOCTYPE html>
+{% load static%}
 <html>
 <head>
-    
+<title>DoIt</title>
+    <link rel="stylesheet" type="text/css" href="{% static '../static/todo.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-<h1>Todo App</h1>
+<div class="con">
+    <h2>DoIt - Manage your tasks to do</h2>
 <ul>
     {% for todo_item in all_items %}
     <li>{{ todo_item.content }}
     <form action="/deleteTodo/{{ todo_item.id }}/"
             style="display: inline;"
             method="post">{% csrf_token %}
-    <input type="submit" value="Delete">
+    <input type="submit" value="Delete" class="del">
 </form>
    </li>
     {% endfor %}
 </ul>
+<br>
 <form action="/addTodo/" method="post">{% csrf_token %}
     <input type="text" name="content">
-    <input type="submit" value="Add">
+    <input type="submit" value="Add" class="add">
 </form>
+</div>
 </body>
 </html>
